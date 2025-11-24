@@ -1,0 +1,91 @@
+﻿@page "{id}"
+@model EditModel
+@{
+    ViewData["Title"] = "Clients";
+}
+
+<div class="card shadow">
+    <form method="post">
+        <input type="hidden" asp-for="Client.ClientId" />
+        <input type="hidden" asp-for="Client.Created" />
+        <div class="card-header">
+            <div class="d-flex justify-content-between">
+                <div class="dpCardHeaderTitle"><h5><i class="bi-box"></i> Edit Client</h5></div>
+                <div class="dpCardHeaderControl">
+                    <button type="submit" class="btn btn-outline-dark"><i class="bi-save"></i> Save</button>
+                    <a class="btn btn-outline-dark" href="~/clients"><i class="bi-arrow-left-square"></i> Back</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="dpDetailHeader"><i class="bi-bookmarks"></i> Detail</div>
+                        <table class="table dpEditTable">
+                            <tbody>
+                                <tr>
+                                    <td>Client Id</td>
+                                    <td>@Model.Client.ClientId</td>
+                                </tr>
+                                <tr>
+                                    <td>Group Id</td>
+                                    <td><input asp-for="Client.GroupId" class="form-control" tabindex="3" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Status</td>
+                                    <td><input asp-for="Client.Status" class="form-control" tabindex="4" /></td>
+                                </tr>
+                                <tr>
+                                    <td>ChatName</td>
+                                    <td><input asp-for="Client.ChatName" class=" form-control" rows="2" tabindex="8" /></td>
+                                </tr>
+                                <tr>
+                                    <td>AccessCode</td>
+                                    <td><input asp-for="Client.AccessCode" class=" form-control" rows="2" tabindex="8" /></td>
+                                </tr>
+                                <tr>
+                                    <td>ClientToken</td>
+                                    <td><input asp-for="Client.ClientToken" class=" form-control" rows="2" tabindex="8" /></td>
+                                </tr>
+                                <tr>
+                                    <td>ChatToken</td>
+                                    <td><input asp-for="Client.ChatToken" class=" form-control" rows="2" tabindex="8" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Create Date</td>
+                                    <td>@Model.Client.Created.UtcToLocalUserTime().ToString("dd.MM.yyyy HH:mm:ss")</td>
+                                </tr>
+                                <tr>
+                                    <td>Last Update</td>
+                                    <td>@Model.Client.Updated.UtcToLocalUserTime().ToString("dd.MM.yyyy HH:mm:ss")</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="dpDetailHeader"><i class="bi-command"></i> Comment</div>
+                        <table class="table dpEditTable">
+                            <tbody>
+                                <tr>
+                                    <td>JSON</td>
+                                    <td><textarea asp-for="Client.ClientJson" class=" form-control" rows="8" tabindex="8"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>Comment</td>
+                                    <td><textarea asp-for="Client.Comment" class=" form-control" rows="2" tabindex="8"></textarea></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+        </div>
+    </form>
+</div>
+

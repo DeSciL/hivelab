@@ -1,0 +1,157 @@
+import aiohttp
+
+from slurk_setup_descil.components.slurk_api import (
+    create_layout,
+    create_room,
+    create_room_token,
+    create_task,
+    create_user,
+    set_permissions,
+)
+
+
+async def setup_and_register_concierge(
+    uri,
+    concierge_url,
+    setup,
+):
+    api_token = setup["api_token"]
+    permissions_id = await set_permissions(uri, api_token, CONCIERGE_PERMISSIONS)
+    concierge_token = await create_room_token(
+        uri, api_token, permissions_id, setup["waiting_room_id"], None, None
+    )
+
+    concierge_user = await create_user(
+        uri, api_token, setup["waiting_room_conciergebot_name"], concierge_token
+    )
+    setup["concierge_token"] = concierge_token
+    setup["concierge_user"] = concierge_user
+
+    print(concierge_url)
+    from pprint import pprint
+
+    pprint(setup)
+
+    async with aiohttp.ClientSession() as session:
+        async with session.post(
+            f"{concierge_url}/register",
+            json=setup,
+        ) as r:
+            r.raise_for_status()
+            print(r)
+
+
+async def setup_waiting_room(
+    uri, api_token, num_users, timeout_seconds, layout, layout_id
+):
+    if layout_id is None:
+        layout_id = await create_layout(uri, api_token, layout or WAITING_ROOM_LAYOUT)
+    waiting_room_id = await create_room(uri, api_token, layout_id)
+    waiting_room_task_id = await create_task(
+        uri, api_token, layout_id, num_users, "Waiting Room"
+    )
+
+    return waiting_room_id, waiting_room_task_id
+
+
+async def setup_chat_room(uri, api_token, num_users, special_layout, layout_id):
+    if layout_id is None:
+        layout_id = await create_layout(uri, api_token, special_layout or CHAT_LAYOUT)
+    chat_room_id = await create_room(uri, api_token, layout_id)
+    chat_task_id = await create_task(uri, api_token, layout_id, num_users, "Room")
+    return chat_room_id, chat_task_id
+
+
+async def create_waiting_room_tokens(
+    uri, api_token, waiting_room_id, task_id, num_users
+):
+    permissions_id = await set_permissions(uri, api_token, MESSAGE_PERMISSIONS)
+    return [
+        await create_room_token(
+            uri, api_token, permissions_id, waiting_room_id, task_id, num_users
+        )
+        for _ in range(num_users)
+    ]
+
+
+CHAT_LAYOUT = {
+    "title": "Room",
+    "scripts": {
+        "incoming-text": "display-text",
+        "incoming-image": "display-image",
+        "submit-message": "send-message",
+        "print-history": "plain-history",
+        "typing-users": "typing-users",
+        "document-ready": "show-countdown-in-header",
+    },
+    "html": [],
+    "css": {
+        "header, footer": {"background": "#115E91"},
+        "#current-users": {"color": "#EEE!important"},
+        "#timeout-message": {"margin": "2em"},
+        "#text": {"padding-top": "0.5em!important"},
+        "#content": {"min-width": "100%!important"},
+        "#sidebar": {"display": "none"},
+    },
+    "show_latency": False,
+}
+
+
+WAITING_ROOM_LAYOUT = {
+    "title": "Waiting Room",
+    "subtitle": "waiting for other players...",
+    "html": [
+        {
+            "layout-type": "div",
+            "id": "image-area",
+            "layout-content": [
+                {
+                    "layout-type": "image",
+                    "id": "current-image",
+                    "src": "https://media.giphy.com/media/tXL4FHPSnVJ0A/giphy.gif",
+                    "width": 500,
+                    "height": 400,
+                },
+            ],
+        },
+    ],
+    "css": {
+        "header, footer": {"background": "#11915E"},
+        "#image-area": {"align-content": "left", "margin": "50px 20px 15px"},
+        "#type-area": {"opacity": "0 !important"},
+    },
+    "scripts": {
+        "incoming-text": "markdown",
+        "incoming-image": "display-image",
+        "submit-message": "send-message",
+        "print-history": "markdown-history",
+        "document-ready": "show-countdown-in-header",
+    },
+    "show_users": True,
+    "show_latency": False,
+    "read_only": False,
+}
+
+
+SIMPLE_LAYOUT = {
+    "title": "Room",
+    "scripts": {
+        "incoming-text": "display-text",
+        "incoming-image": "display-image",
+        "submit-message": "send-message",
+        "print-history": "plain-history",
+        "document-ready": "show-countdown-in-header",
+    },
+    "show_latency": False,
+}
+
+MESSAGE_PERMISSIONS = {"send_message": True}
+
+
+CONCIERGE_PERMISSIONS = {
+    "api": True,
+    "send_html_message": True,
+    "send_message": True,
+    "send_privately": True,
+    "broadcast": False,
+}

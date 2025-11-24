@@ -1,0 +1,109 @@
+﻿@page "{id}"
+@model DetailModel
+@{
+    ViewData["Title"] = "Treatments";
+}
+
+<div class="card shadow">
+
+    <div class="card-header">
+        <div class="d-flex justify-content-between">
+            <div class="dpCardHeaderTitle"><h5><i class="bi-box"></i> Edit Treatment</h5></div>
+            <div class="dpCardHeaderControl">
+                <form method="post">
+                    <input type="hidden" asp-for="Treatment.TreatmentId" />
+                    <a class="btn btn-outline-dark" href="~/treatments/edit/@Model.Treatment.TreatmentId"><i class="bi-pencil-square"></i> Edit</a>
+                    <a class="btn btn-outline-dark" href="~/treatments"><i class="bi-arrow-left-square"></i> Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="dpDetailHeader"><i class="bi-bookmarks"></i> Detail</div>
+                    <table class="table table-small dpDetailTable">
+                        <tbody>
+                            <tr>
+                                <td>Treatment Id</td>
+                                <td>@Model.Treatment.TreatmentId</td>
+                            </tr>
+                            <tr>
+                                <td>Name</td>
+                                <td>@Model.Treatment.Name</td>
+                            </tr>
+                            <tr>
+                                <td>Category</td>
+                                <td>@Model.Treatment.Category</td>
+                            </tr>
+                            <tr>
+                                <td>SortOrder</td>
+                                <td>@Model.Treatment.SortOrder</td>
+                            </tr>
+                            <tr>
+                                <td>Groups</td>
+                                <td>@Model.Treatment.GroupCount</td>
+                            </tr>
+                            <tr>
+                                <td>Seats</td>
+                                <td>@Model.Treatment.Seats</td>
+                            </tr>
+                            <tr>
+                                <td>Overbook</td>
+                                <td>@Model.Treatment.Overbook</td>
+                            </tr>
+                            <tr>
+                                <td>Bots</td>
+                                <td>@Model.Treatment.Bots</td>
+                            </tr>
+
+
+                            <tr>
+                                <td>Create Date</td>
+                                <td>@Model.Treatment.Created.UtcToLocalUserTime().ToString("dd.MM.yyyy HH:mm:ss")</td>
+                            </tr>
+                            <tr>
+                                <td>Last Update</td>
+                                <td>@Model.Treatment.Updated.UtcToLocalUserTime().ToString("dd.MM.yyyy HH:mm:ss")</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-6">
+                    <div class="dpDetailHeader"><i class="bi-command"></i> Comment</div>
+                    <table class="table table-small dpDetailTable">
+                        <tbody>
+                            <tr>
+                                <td>PromptId</td>
+                                <td>@Model.Treatment.PromptId</td>
+                            </tr>
+                            <tr>
+                                <td>Info</td>
+                                <td>@Model.Treatment.Info</td>
+                            </tr>
+                            <tr>
+                                <td>Positive</td>
+                                <td>@Model.Treatment.Positive</td>
+                            </tr>
+                            <tr>
+                                <td>Topic</td>
+                                <td>@Model.Treatment.Topic</td>
+                            </tr>
+                            <tr>
+                                <td>JSON</td>
+                                <td>@Model.Treatment.TreatmentJson</td>
+                            </tr>
+                            <tr>
+                                <td>Comment</td>
+                                <td>@Model.Treatment.Comment</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+    </div>
+</div>

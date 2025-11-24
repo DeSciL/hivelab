@@ -1,0 +1,73 @@
+﻿@page "{id}"
+@model DetailModel
+@{
+    ViewData["Title"] = "Prompts";
+}
+
+<div class="card shadow">
+    <div class="card-header">
+        <div class="d-flex justify-content-between">
+            <div class="dpCardHeaderTitle"><h5><i class="bi-box"></i> Edit Prompt</h5></div>
+            <div class="dpCardHeaderControl">
+                <form method="post">
+                    <input type="hidden" asp-for="Prompt.PromptId" />
+                    <a class="btn btn-outline-dark" href="~/prompts/edit/@Model.Prompt.PromptId"><i class="bi-pencil-square"></i> Edit</a>
+                    <a class="btn btn-outline-dark" href="~/prompts"><i class="bi-arrow-left-square"></i> Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="dpDetailHeader"><i class="bi-bookmarks"></i> Detail</div>
+                    <table class="table table-small dpDetailTable">
+                        <tbody>
+                            <tr>
+                                <td>Prompt Id</td>
+                                <td>@Model.Prompt.PromptId</td>
+                            </tr>
+                            <tr>
+                                <td>Bot Id</td>
+                                <td>@Model.Prompt.BotId</td>
+                            </tr>
+                            <tr>
+                                <td>Type</td>
+                                <td>@Model.Prompt.Type</td>
+                            </tr>
+                            <tr>
+                                <td>Comment</td>
+                                <td>@Model.Prompt.Comment</td>
+                            </tr>
+                            <tr>
+                                <td>JSON</td>
+                                <td>@Model.Prompt.PromptJson</td>
+                            </tr>
+                            <tr>
+                                <td>Create Date</td>
+                                <td>@Model.Prompt.Created.UtcToLocalUserTime().ToString("dd.MM.yyyy HH:mm:ss")</td>
+                            </tr>
+                            <tr>
+                                <td>Last Update</td>
+                                <td>@Model.Prompt.Updated.UtcToLocalUserTime().ToString("dd.MM.yyyy HH:mm:ss")</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-8">
+                    <div class="dpDetailHeader"><i class="bi-command"></i> Content</div>
+                    <table class="table dpEditTable">
+                        <tbody>
+                            <tr>
+                                <td><pre style="white-space: pre-wrap;">@Model.Prompt.Content</pre></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+    </div>
+</div>

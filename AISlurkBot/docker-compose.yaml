@@ -1,0 +1,113 @@
+version: '3.4'
+
+services:
+
+  setup_service:
+    image: registry.ethz.ch/sis/slurk-chat-bot-setup-descil/slurk-setup-descil:latest
+    build:
+      dockerfile: ./Dockerfile
+    command: "setup_service"
+    pull_policy: 'missing'
+    ports:
+    - "8789:81"
+    environment:
+    - "no_proxy=slurk,concierge_plus,chatbot,managerbot,setup_service"
+    - "http_proxy="
+    - "https_proxy="
+    - "HTTP_PROXY="
+    - "HTTPS_PROXY="
+    - "CONCIERGE_URL=http://concierge_plus:82"
+    - "SLURK_HOST=http://slurk"
+    - "SLURK_PORT=80"
+    - "ADMIN_TOKEN=666"
+
+  concierge_plus:
+    image: registry.ethz.ch/sis/slurk-chat-bot-setup-descil/slurk-setup-descil:latest
+    build:
+      dockerfile: ./Dockerfile
+    command: "concierge_plus"
+    pull_policy: 'missing'
+    environment:
+    - "no_proxy=slurk,concierge_plus,chatbot,managerbot,setup_service"
+    - "SLURK_HOST=http://slurk"
+    - "SLURK_PORT=80"
+    - "PYTHONASYNCIODEBUG=1"
+    - "PYTHONUNBUFFERED=1"
+    - "CHATBOT_URL=http://chatbot:84"
+    - "MANAGERBOT_URL=http://managerbot:85"
+
+  chatbot:
+    image: registry.ethz.ch/sis/slurk-chat-bot-setup-descil/slurk-setup-descil:latest
+    build:
+      dockerfile: ./Dockerfile
+    pull_policy: 'missing'
+    command: "chatbot"
+    environment:
+    - "no_proxy=slurk,concierge_plus,chatbot,managerbot,setup_service"
+    - "SLURK_HOST=http://slurk"
+    - "SLURK_PORT=80"
+    - "PYTHONASYNCIODEBUG=1"
+    - "PYTHONUNBUFFERED=1"
+    - "AZURE_OPENAI_ENDPOINT=https://css-openai.openai.azure.com/"
+    - "AZURE_OPENAI_API_KEY="
+    - "AZURE_OPENAI_API_VERSION=2023-12-01-preview"
+    - "AZURE_OPENAI_MODEL=css-openai-gpt35"
+    - "OPENAI_API_KEY="
+    - "OPENAI_MODEL=gpt-3.5-turbo-1106"
+    - "AI_PROVIDER="  # set to "AZURE" to use azure model, other values result in using OPENAI directly
+    - "AI_MODEL_TEMPERATURE=0.9"
+    - "AI_MODEL_MAX_TOKENS=80"
+    - "PROMPT_URL=https://pastebin.com/raw/ZVcHDMQq"
+
+  managerbot:
+    image: registry.ethz.ch/sis/slurk-chat-bot-setup-descil/slurk-setup-descil:latest
+    build:
+      dockerfile: ./Dockerfile
+    pull_policy: 'missing'
+    command: "managerbot"
+    environment:
+    - "no_proxy=slurk,concierge_plus,chatbot,managerbot,setup_service"
+    - "SLURK_HOST=http://slurk"
+    - "SLURK_PORT=80"
+    - "PYTHONASYNCIODEBUG=1"
+    - "PYTHONUNBUFFERED=1"
+    - "PROMPT_URL=https://pastebin.com/raw/ZVcHDMQq"
+
+  slurk:
+    image: registry.ethz.ch/sis/slurk-chat-bot-setup-descil/slurk:latest
+    pull_policy: 'missing'
+    entrypoint: /bin/bash
+    command:
+        - -c
+        - >
+          gunicorn
+          --capture-output
+          --error-logfile -
+          --access-logfile -
+          --log-level DEBUG
+          -b :80
+          -k geventwebsocket.gunicorn.workers.GeventWebSocketWorker
+          "slurk:create_app()"
+          |& tee /log/slurk.log
+    ports:
+    - "8788:80"
+    environment:
+    - "no_proxy=slurk,concierge_plus,chatbot,managerbot,setup_service"
+    - "ADMIN_TOKEN=666"
+    - "REMEMBER_COOKIE_REFRESH_EACH_REQUEST=1"
+
+  nginx:
+    image: nginx
+    init: true
+    volumes:
+      - type: bind
+        source: $PWD/nginx/nginx.conf
+        target: /etc/nginx/nginx.conf
+      - type: bind
+        source: $PWD/nginx/html
+        target: /etc/nginx/html
+    depends_on:
+      - "slurk"
+      - "setup_service"
+    ports:
+      - "80:80"

@@ -1,0 +1,116 @@
+﻿/* Descil.Panel Specific */
+
+ul.pagination {
+    margin-bottom: 0;
+}
+
+#navtabs a {
+    color: black;
+}
+
+.dpNavtabs {
+    color: black;
+    margin-bottom: 1em;
+}
+
+.dpTable {
+    margin-top: 0;
+    border-collapse: collapse;
+    border-radius: 0.25rem;
+    border-style: hidden; /* hide standard table (collapsed) border */
+    box-shadow: 0 0 0 1px lightgray; /* this draws the table border  */
+}
+
+.dpCardHeaderTitle {
+    margin-top: .5rem;
+}
+
+.dpCardHeaderControl {
+}
+
+.dpDetailHeader {
+    margin-left: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: dimgray;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.dpDetailTable {
+    margin-top: 0;
+    border-collapse: collapse;
+    border-radius: 0.25rem;
+    border-style: hidden; /* hide standard table (collapsed) border */
+    box-shadow: 0 0 0 1px lightgray; /* this draws the table border  */
+}
+
+    .dpDetailTable td {
+        border-style: solid;
+        border-color: lightgray;
+        border-width: 1px;
+        padding: 0.25rem;
+    }
+
+    .dpDetailTable tbody tr td:first-child {
+        width: 150px;
+        max-width: 150px;
+        text-align: left;
+    }
+
+.dpRowTable {
+    margin-top: 0;
+    border-collapse: collapse;
+    border-radius: 0.25rem;
+    border-style: hidden; /* hide standard table (collapsed) border */
+    box-shadow: 0 0 0 1px lightgray; /* this draws the table border  */
+}
+
+    .dpRowTable td {
+        border-style: solid;
+        border-color: lightgray;
+        border-width: 1px;
+        padding: 0.25rem;
+    }
+
+.dpEditTable {
+}
+
+    .dpEditTable tr:first-of-type {
+        border-top-style: solid;
+        border-top-color: #dee2e6;
+        border-top-width: 1px;
+    }
+
+    .dpEditTable tbody tr td:first-child {
+        width: 120px;
+        max-width: 120px;
+        text-align: left;
+    }
+
+    .dpEditTable input[type=number] {
+        width: 6rem;
+    }
+
+    .dpEditTable input[type=datetime-local] {
+        width: 15rem;
+    }
+
+/* 
+    .dpEditTable :not(:first-child) {
+        border-top-style: solid;
+        border-top-color: blue;
+        border-top-width:1px;
+    }
+*/
+
+.dpMessageList {
+    color: darkgray;
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.dpDashboardAlert {
+    background-color: #f8f9fa;
+}

@@ -1,0 +1,132 @@
+﻿@page
+@model SetupModel
+@{
+    ViewData["Title"] = "Setup";
+}
+
+<div class="card shadow">
+    <form method="post">
+        <div class="card-header">
+            <div class="d-flex justify-content-between">
+                <div class="dpCardHeaderTitle"><h5><i class="bi-gear"></i> Setup</h5></div>
+                <div class="dpCardHeaderControl">
+                    <button class="btn btn-outline-dark" type="submit">
+                        <i class="bi bi-plus-square"></i> <span class="d-none d-md-inline"> Add</span>
+                    </button>
+                    <a class="btn btn-outline-dark" href="~/"><i class="bi-arrow-left-square"></i> Back</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="dpDetailHeader"><i class="bi-bookmarks"></i> Detail</div>
+                    <div class="py-2">
+                        <label asp-for="Input.UserCount" class="form-label">User Count</label>
+                        <input asp-for="Input.UserCount" class="form-control" placeholder="1">
+                        <span asp-validation-for="Input.UserCount" class="text-danger"></span>
+                    </div>
+
+                    <div class="py-2">
+                        <label asp-for="Input.BotId" class="form-label">Bot Id(s)</label>
+                        <input asp-for="Input.BotId" class="form-control" placeholder="None">
+                        <span asp-validation-for="Input.BotId" class="text-danger"></span>
+                    </div>
+
+                    <div class="py-2">
+                        <label asp-for="Input.BotName" class="form-label">Bot Name(s)</label>
+                        <input asp-for="Input.BotName" class="form-control" placeholder="None" />
+                        <span asp-validation-for="Input.BotName" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="dpDetailHeader mt-5"><i class="bi-bookmarks"></i> Assignment Overrides</div>
+                    <div class="py-2">
+                        <label asp-for="Input.TreatmentOverride" class="form-label">Treatment Id</label>
+                        <input asp-for="Input.TreatmentOverride" class="form-control" placeholder="0" disabled>
+                        <span asp-validation-for="Input.TreatmentOverride" class="text-danger"></span>
+                    </div>
+                    <div class="py-2">
+                        <label asp-for="Input.GroupOverride" class="form-label">Group Id</label>
+                        <input asp-for="Input.GroupOverride" class="form-control" placeholder="0" disabled>
+                        <span asp-validation-for="Input.GroupOverride" class="text-danger"></span>
+                    </div>
+                    <div class="py-2">
+                        <label asp-for="Input.ClientOverride" class="form-label">Client Id</label>
+                        <input asp-for="Input.ClientOverride" class="form-control" placeholder="0" disabled>
+                        <span asp-validation-for="Input.ClientOverride" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="dpDetailHeader"><i class="bi-bookmarks"></i> Room Configuration</div>
+                    <div class="py-2">
+                        <label asp-for="Input.WaitingRoomLayoutId" class="form-label">Waiting Room Layout</label>
+                        <input asp-for="Input.WaitingRoomLayoutId" class="form-control" placeholder="1">
+                        <span asp-validation-for="Input.WaitingRoomLayoutId" class="text-danger"></span>
+                    </div>
+                    <div class="py-2">
+                        <label asp-for="Input.WaitingRoomTimeoutSeconds" class="form-label">Waiting Room Timeout</label>
+                        <input asp-for="Input.WaitingRoomTimeoutSeconds" class="form-control" placeholder="1">
+                        <span asp-validation-for="Input.WaitingRoomTimeoutSeconds" class="text-danger"></span>
+                    </div>
+                    <div class="py-2">
+                        <label asp-for="Input.WaitingRoomMinSize" class="form-label">Waiting Room Min Size</label>
+                        <input asp-for="Input.WaitingRoomMinSize" class="form-control" placeholder="1">
+                        <span asp-validation-for="Input.WaitingRoomMinSize" class="text-danger"></span>
+                    </div>
+                    <div class="py-2">
+                        <label asp-for="Input.ChatRoomLayoutId" class="form-label">Chat Room Layout</label>
+                        <input asp-for="Input.ChatRoomLayoutId" class="form-control" placeholder="1">
+                        <span asp-validation-for="Input.ChatRoomLayoutId" class="text-danger"></span>
+                    </div>
+                    <div class="py-2">
+                        <label asp-for="Input.ChatRoomTimeoutSeconds" class="form-label">Chat Room Timeout</label>
+                        <input asp-for="Input.ChatRoomTimeoutSeconds" class="form-control" placeholder="1">
+                        <span asp-validation-for="Input.ChatRoomTimeoutSeconds" class="text-danger"></span>
+                    </div>
+                    <div class="py-2">
+                        <label asp-for="Input.ChatRoomMinSize" class="form-label">Chat Room Min Size</label>
+                        <input asp-for="Input.ChatRoomMinSize" class="form-control" placeholder="1">
+                        <span asp-validation-for="Input.ChatRoomMinSize" class="text-danger"></span>
+                    </div>
+
+                    <div class="py-2">
+                        <label asp-for="Input.BotIgnoreMessage" class="form-label">Bot Ignore Message Level</label>
+                        <input asp-for="Input.BotIgnoreMessage" class="form-control" placeholder="1" disabled>
+                        <span asp-validation-for="Input.BotIgnoreMessage" class="text-danger"></span>
+                    </div>
+                    <div class="py-2">
+                        <label asp-for="Input.BotCancelMessage" class="form-label">Bot Cancel Message Level</label>
+                        <input asp-for="Input.BotCancelMessage" class="form-control" placeholder="1" disabled>
+                        <span asp-validation-for="Input.BotCancelMessage" class="text-danger"></span>
+                    </div>
+                    <div class="py-2">
+                        <label asp-for="Input.BotConfig" class="form-label">Bot Configuration JSON</label>
+                        <input asp-for="Input.BotConfig" class="form-control" placeholder="1" disabled>
+                        <span asp-validation-for="Input.BotConfig" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            @if (Model.SlurkLinks.Any())
+            {
+                <div class="row">
+                    <div class="col py-2">
+                        <div class="alert alert-success mt-3" role="alert">
+                            @foreach (var item in Model.SlurkLinks)
+                            {
+                                <a href="@item.Url">@item.Url</a>
+                                <br />
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="card-footer">
+        </div>
+    </form>
+</div>

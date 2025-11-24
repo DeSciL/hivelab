@@ -1,0 +1,75 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Bots";
+}
+
+<div class="card shadow">
+    <div class="card-header">
+        <div class="d-flex justify-content-between">
+            <div class="dpCardHeaderTitle"><h5><i class="bi-box"></i> Bots</h5></div>
+            <div class="dpCardHeaderControl">
+                <a class="btn btn-outline-dark" href="~/"><i class="bi-arrow-left-square"></i> Back</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped table-sm dpTable">
+            <thead>
+                <tr>
+                    <th width="50px">Bot Id</th>
+                    <th width="100px">Name</th>
+                    <th>Type</th>
+                    <th>Comment</th>
+                    <th width="50px">&nbsp;</th>
+                    <th width="50px">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model.Bots)
+                {
+                    <tr>
+                        <td><a href="~/bots/detail/@p.BotId" class="not-active">@p.BotId</a></td>
+                        <td>@p.Name</td>
+                        <td>@p.Type</td>
+                        <td>@p.Comment</td>
+                        <td align="right"><a href="~/bots/edit/@p.BotId">Edit</a></td>
+                        <td align="right"><a href="~/bots/detail/@p.BotId">Detail</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <nav aria-label="Pagination">
+            <cs-pager cs-paging-pagesize="@Model.Paging.ItemsPerPage"
+                      cs-paging-pagenumber="@Model.Paging.CurrentPage"
+                      cs-paging-totalitems="@Model.Paging.TotalItems"
+                      cs-pagenumber-param="p"
+                      cs-show-first-last="false"
+                      cs-suppress-empty-nextprev="true"
+                      cs-suppress-inactive-firstlast="true"
+                      cs-first-page-text="First"
+                      cs-last-page-text="Last"
+                      cs-pager-ul-class="pagination"
+                      cs-pager-li-current-class="page-item active"
+                      cs-pager-li-other-class="page-item"
+                      cs-pager-li-non-active-class="page-item disabled"
+                      cs-pager-link-current-class="page-link"
+                      cs-pager-link-other-class="page-link"
+                      cs-preserve-ambient-querystring="true"
+                      cs-paging-maxpageritems="2"
+                      asp-basehref="~/bots">
+            </cs-pager>
+        </nav>
+    </div>
+</div>
+
+@section Scripts {
+    @*
+    <script type="text/javascript">
+        document.getElementById("Query").focus();
+    </script>
+    <partial name="_ToolTipPartial" />
+    *@
+}

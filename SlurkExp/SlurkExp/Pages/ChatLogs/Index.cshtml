@@ -1,0 +1,71 @@
+﻿@page "{id}"
+@model IndexModel
+@{
+    ViewData["Title"] = "Logs";
+}
+
+<div class="card shadow">
+    <div class="card-header">
+        <div class="d-flex justify-content-between">
+            <div class="dpCardHeaderTitle"><h5><i class="bi-box"></i> Logs</h5></div>
+            <div class="dpCardHeaderControl">
+                <a class="btn btn-outline-dark" href="~/"><i class="bi-arrow-left-square"></i> Back</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped table-sm dpTable">
+            <thead>
+                <tr>
+                    <th width="70px">Id</th>
+                    <th width="180px">DateCreated</th>
+                    <th width="75px">RoomId</th>
+                    <th width="75px">Event</th>
+                    <th width="75px">UserId</th>
+                    <th width="100px">UserName</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model.Logs)
+                {
+                    <tr>
+                        <td>@p.Id</td>
+                        <td>@p.DateCreated.UtcToLocalUserTime().ToString("dd.MM.yyyy HH:mm:ss")</td>
+                        <td>@p.RoomId</td>
+                        <td>@Model.FormatEvent(@p.Event)</td>
+                        <td><a href="~/users/@p.UserId">@p.UserId</a></td>
+                        <td>@p.User.Name</td>
+                        <td>@Model.FormatMessage(p.Data)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <nav aria-label="Pagination">
+            @*
+            <cs-pager cs-paging-pagesize="@Model.Paging.ItemsPerPage"
+                      cs-paging-pagenumber="@Model.Paging.CurrentPage"
+                      cs-paging-totalitems="@Model.Paging.TotalItems"
+                      cs-pagenumber-param="p"
+                      cs-show-first-last="false"
+                      cs-suppress-empty-nextprev="true"
+                      cs-suppress-inactive-firstlast="true"
+                      cs-first-page-text="First"
+                      cs-last-page-text="Last"
+                      cs-pager-ul-class="pagination"
+                      cs-pager-li-current-class="page-item active"
+                      cs-pager-li-other-class="page-item"
+                      cs-pager-li-non-active-class="page-item disabled"
+                      cs-pager-link-current-class="page-link"
+                      cs-pager-link-other-class="page-link"
+                      cs-preserve-ambient-querystring="true"
+                      cs-paging-maxpageritems="2"
+                      asp-basehref="~/logevents">
+            </cs-pager>
+            *@
+        </nav>
+    </div>
+</div>
+

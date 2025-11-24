@@ -1,0 +1,40 @@
+﻿@page
+@model ResultModel
+@{
+    ViewData["Title"] = "Result";
+}
+
+@section Head {
+    <meta http-equiv="refresh" content="5" />
+    <meta http-equiv="refresh" content="5; url=@Model.UrlEnd">
+}
+
+<div>
+    <h1 class="display-5">Result</h1>
+
+    @if (string.IsNullOrEmpty(Model.Type))
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Oops!</strong> Something did not work properly. <br />@Model.Token
+        </div>
+    }
+    else if (Model.Type.Equals("wait"))
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Timeout!</strong> We were not able to find sufficient participants for the chat. <br />@Model.Token
+        </div>
+    }
+    else if (Model.Type.Equals("drop"))
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Dropout!</strong> Looks like some folks dropped out of the room. <br />@Model.Token
+        </div>
+    }
+    else if (Model.Type.Equals("chat") || Model.Type.Equals("chatx"))
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Chat complete!</strong> Thank you! The redirect to the questionnaire is currently not active. <br />@Model.Token
+        </div>
+    }
+
+</div>

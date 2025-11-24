@@ -1,0 +1,115 @@
+﻿@page "{id}"
+@model EditModel
+@{
+    ViewData["Title"] = "Treatments";
+}
+
+<div class="card shadow">
+    <form method="post">
+        <input type="hidden" asp-for="Treatment.TreatmentId" />
+        <input type="hidden" asp-for="Treatment.Created" />
+        <div class="card-header">
+            <div class="d-flex justify-content-between">
+                <div class="dpCardHeaderTitle"><h5><i class="bi-box"></i> Edit Treatment</h5></div>
+                <div class="dpCardHeaderControl">
+                    <button type="submit" class="btn btn-outline-dark"><i class="bi-save"></i> Save</button>
+                    <a class="btn btn-outline-dark" href="~/treatments"><i class="bi-arrow-left-square"></i> Back</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="dpDetailHeader"><i class="bi-bookmarks"></i> Detail</div>
+                        <table class="table dpEditTable">
+                            <tbody>
+                                <tr>
+                                    <td>Treatment Id</td>
+                                    <td>@Model.Treatment.TreatmentId</td>
+                                </tr>
+                                <tr>
+                                    <td>Name</td>
+                                    <td><input asp-for="Treatment.Name" class="form-control" tabindex="3" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Category</td>
+                                    <td><input asp-for="Treatment.Category" class="form-control" tabindex="4" /></td>
+                                </tr>
+                                <tr>
+                                    <td>SortOrder</td>
+                                    <td><input asp-for="Treatment.SortOrder" class="form-control" tabindex="4" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Groups</td>
+                                    <td><input asp-for="Treatment.GroupCount" class="form-control" tabindex="4" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Seats</td>
+                                    <td><input asp-for="Treatment.Seats" class="form-control" tabindex="4" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Overbook</td>
+                                    <td><input asp-for="Treatment.Overbook" class="form-control" tabindex="4" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Bots</td>
+                                    <td><input asp-for="Treatment.Bots" class="form-control" tabindex="4" /></td>
+                                </tr>
+                                
+                                
+                                <tr>
+                                    <td>Create Date</td>
+                                    <td>@Model.Treatment.Created.UtcToLocalUserTime().ToString("dd.MM.yyyy HH:mm:ss")</td>
+                                </tr>
+                                <tr>
+                                    <td>Last Update</td>
+                                    <td>@Model.Treatment.Updated.UtcToLocalUserTime().ToString("dd.MM.yyyy HH:mm:ss")</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="dpDetailHeader"><i class="bi-command"></i> Comment</div>
+                        <table class="table dpEditTable">
+                            <tbody>
+                                <tr>
+                                    <td>PromptId</td>
+                                    <td><input asp-for="Treatment.PromptId" class="form-control" tabindex="4" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Info</td>
+                                    <td><input asp-for="Treatment.Info" class="form-control" tabindex="4" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Positive</td>
+                                    <td><input asp-for="Treatment.Positive" class="form-control" tabindex="4" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Topic</td>
+                                    <td><input asp-for="Treatment.Topic" class="form-control" tabindex="4" /></td>
+                                </tr>
+                                <tr>
+                                    <td>JSON</td>
+                                    <td><textarea asp-for="Treatment.TreatmentJson" class=" form-control" rows="2" tabindex="8"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>Comment</td>
+                                    <td><textarea asp-for="Treatment.Comment" class=" form-control" rows="2" tabindex="7"></textarea></td>
+                                </tr>
+                                
+
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+        </div>
+    </form>
+</div>
+

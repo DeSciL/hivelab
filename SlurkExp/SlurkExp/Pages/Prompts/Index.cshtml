@@ -1,0 +1,68 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Prompts";
+}
+
+<div class="card shadow">
+    <div class="card-header">
+        <div class="d-flex justify-content-between">
+            <div class="dpCardHeaderTitle"><h5><i class="bi-box"></i> Prompts</h5></div>
+            <div class="dpCardHeaderControl">
+                <a class="btn btn-outline-dark" href="~/"><i class="bi-arrow-left-square"></i> Back</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped table-sm dpTable">
+            <thead>
+                <tr>
+                    <th width="50px">Id</th>
+                    <th width="50px">BotId</th>
+                    <th width="100px">Type</th>
+                    <th width="250px">Comment</th>
+                    <th style="max-width:500px">Content</th>
+                    <th width="50px">&nbsp;</th>
+                    <th width="50px">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model.Prompts)
+                {
+                    <tr>
+                        <td><a href="~/prompts/detail/@p.PromptId" class="not-active">@p.PromptId</a></td>
+                        <td>@p.BotId</td>
+                        <td>@p.Type</td>
+                        <td>@p.Comment</td>
+                        <td style="max-width:500px"><div class="text-truncate">@p.Content</div></td>
+                        <td align="right"><a href="~/prompts/edit/@p.PromptId">Edit</a></td>
+                        <td align="right"><a href="~/prompts/detail/@p.PromptId">Detail</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <nav aria-label="Pagination">
+            <cs-pager cs-paging-pagesize="@Model.Paging.ItemsPerPage"
+                      cs-paging-pagenumber="@Model.Paging.CurrentPage"
+                      cs-paging-totalitems="@Model.Paging.TotalItems"
+                      cs-pagenumber-param="p"
+                      cs-show-first-last="false"
+                      cs-suppress-empty-nextprev="true"
+                      cs-suppress-inactive-firstlast="true"
+                      cs-first-page-text="First"
+                      cs-last-page-text="Last"
+                      cs-pager-ul-class="pagination"
+                      cs-pager-li-current-class="page-item active"
+                      cs-pager-li-other-class="page-item"
+                      cs-pager-li-non-active-class="page-item disabled"
+                      cs-pager-link-current-class="page-link"
+                      cs-pager-link-other-class="page-link"
+                      cs-preserve-ambient-querystring="true"
+                      cs-paging-maxpageritems="2"
+                      asp-basehref="~/prompts">
+            </cs-pager>
+        </nav>
+    </div>
+</div>

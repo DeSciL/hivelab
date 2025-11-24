@@ -1,0 +1,20 @@
+{
+  "title": "Waiting Room",
+  "html": [],
+  "css": {
+    "header, footer": { "background": "#47474a" },
+    "#content": { "min-width": "100%!important" },
+    "#sidebar": { "display": "none" },
+    "#type-area": { "opacity": "0 !important" }
+  },
+  "scripts": {
+    "incoming-text": "markdown",
+    "incoming-image": "display-image",
+    "submit-message": "send-message",
+    "print-history": "markdown-history",
+    "document-ready": "show-countdown-in-header"
+  },
+  "show_users": false,
+  "show_latency": false,
+  "read_only": false
+}

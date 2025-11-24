@@ -1,0 +1,23 @@
+{
+  "title": "Chat Roomz",
+  "html": [],
+  "css": {
+        "header, footer": {"background": "#115E91"},
+        "#current-users": {"color": "#EEE!important", "max-width": "400px" },
+        "#timeout-message": {"margin": "2em"},
+        "#text": {"padding-top": "0.5em!important"},
+        "#content": {"min-width": "100%!important"},
+        "#sidebar": {"display": "none"}
+  },
+  "scripts": {
+    "incoming-text": "display-text",
+    "incoming-image": "display-image",
+    "submit-message": "send-message",
+    "print-history": "plain-history",
+    "typing-users": "typing-users",
+    "document-ready": "show-countdown-in-header"
+  },
+  "show_users": false,
+  "show_latency": false,
+  "read_only": false
+}

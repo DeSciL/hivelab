@@ -1,0 +1,77 @@
+﻿@page "{id}"
+@model EditModel
+@{
+    ViewData["Title"] = "Prompts";
+}
+
+<div class="card shadow">
+    <form method="post">
+        <input type="hidden" asp-for="Prompt.PromptId" />
+        <input type="hidden" asp-for="Prompt.Created" />
+        <div class="card-header">
+            <div class="d-flex justify-content-between">
+                <div class="dpCardHeaderTitle"><h5><i class="bi-box"></i> Edit Prompt</h5></div>
+                <div class="dpCardHeaderControl">
+                    <button type="submit" class="btn btn-outline-dark"><i class="bi-save"></i> Save</button>
+                    <a class="btn btn-outline-dark" href="~/prompts"><i class="bi-arrow-left-square"></i> Back</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="dpDetailHeader"><i class="bi-bookmarks"></i> Detail</div>
+                        <table class="table dpEditTable">
+                            <tbody>
+                                <tr>
+                                    <td>Prompt Id</td>
+                                    <td>@Model.Prompt.PromptId</td>
+                                </tr>
+                                <tr>
+                                    <td>Bot Id</td>
+                                    <td><input asp-for="Prompt.BotId" class="form-control" tabindex="3" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Type</td>
+                                    <td><input asp-for="Prompt.Type" class="form-control" tabindex="4" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Comment</td>
+                                    <td><textarea asp-for="Prompt.Comment" class=" form-control" rows="2" tabindex="8"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>JSON</td>
+                                    <td><textarea asp-for="Prompt.PromptJson" class=" form-control" rows="2" tabindex="8"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>Create Date</td>
+                                    <td>@Model.Prompt.Created.UtcToLocalUserTime().ToString("dd.MM.yyyy HH:mm:ss")</td>
+                                </tr>
+                                <tr>
+                                    <td>Last Update</td>
+                                    <td>@Model.Prompt.Updated.UtcToLocalUserTime().ToString("dd.MM.yyyy HH:mm:ss")</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="dpDetailHeader"><i class="bi-command"></i> Content</div>
+                        <table class="table dpEditTable">
+                            <tbody>
+                                <tr>
+                                    <td><textarea asp-for="Prompt.Content" class=" form-control" rows="20" tabindex="7"></textarea></td>
+                                </tr>
+                                
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+        </div>
+    </form>
+</div>
+

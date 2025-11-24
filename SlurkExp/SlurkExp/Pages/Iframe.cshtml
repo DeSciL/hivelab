@@ -1,0 +1,18 @@
+﻿@page
+@model IframeModel
+@{
+    ViewData["Title"] = "Slurk IFrame";
+}
+
+<div class="container-fluid g-0">
+    <div class="row g-0">
+        <div class="col-12">
+            <div class="card mt-4">
+                <!-- changes made from here -->
+                <div class="ratio ratio-16x9">
+                    <iframe class="embed-responsive-item" src="@Model.BaseUrl"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

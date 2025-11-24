@@ -1,0 +1,36 @@
+﻿@page
+@model LiveModel
+@{
+    ViewData["Title"] = "Live";
+}
+
+<div class="card shadow">
+    <div class="card-header">
+        <div class="d-flex justify-content-between">
+            <div class="dpCardHeaderTitle"><h5><i class="bi-broadcast-pin"></i> Live</h5></div>
+            <div class="dpCardHeaderControl">
+                <div class="input-group">
+                    <input type="text" id="messageInput" class="form-control" value="" />
+                    <button id="sendButton" class="btn btn-outline-dark" type="button" value="Send">
+                        <i class="bi bi-send"></i> <span class="d-none d-md-inline"> Send</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <style>
+            #messagesList li:nth-of-type(1n+21) {
+                display: none;
+            }
+        </style>
+        <ul id="messagesList" class="dpMessageList" style="min-height:480px"></ul>
+    </div>
+    <div class="card-footer">
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/microsoft-signalr/signalr.min.js"></script>
+    <script src="~/js/slurkexp.js"></script>
+}

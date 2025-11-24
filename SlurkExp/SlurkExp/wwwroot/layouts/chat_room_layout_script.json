@@ -1,0 +1,29 @@
+{
+  "title": "Chat Room",
+  "html": [
+    {
+      "layout-type": "script",
+      "id": "show-timeout-in-header",
+      "layout-content":"$('#text').focus();function handle_broadcast(payload) { if (payload['type'] != 'time_left_chatroom') return; if (payload['room'] != self_room) return; const time_left = payload['time_left']; const minutes = Math.floor(time_left / 60); const seconds = time_left % 60; var msg = ''; if (minutes > 0) { msg = `${minutes} minutes and ${seconds} seconds left`; } else if (seconds > 0) { msg = `${seconds} seconds left`; } else { msg = ''; } $('#subtitle')[0].innerText = msg; } socket.on('client_broadcast', handle_broadcast);"
+    }
+  ],
+  "css": {
+        "header, footer": {"background": "#115E91"},
+        "#current-users": {"color": "#EEE!important"},
+        "#timeout-message": {"margin": "2em"},
+        "#text": {"padding-top": "0.5em!important"},
+        "#content": {"min-width": "100%!important"},
+        "#sidebar": {"display": "none"}
+  },
+  "scripts": {
+    "incoming-text": "display-text",
+    "incoming-image": "display-image",
+    "submit-message": "send-message",
+    "print-history": "plain-history",
+    "typing-users": "typing-users",
+    "document-ready": "show-countdown-in-header"
+  },
+  "show_users": true,
+  "show_latency": false,
+  "read_only": false
+}

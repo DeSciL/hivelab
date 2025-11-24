@@ -1,0 +1,124 @@
+﻿@page "{id}"
+@model EditModel
+@{
+    ViewData["Title"] = "Groups";
+}
+
+<div class="card shadow">
+    <form method="post">
+        <input type="hidden" asp-for="Group.GroupId" />
+        <input type="hidden" asp-for="Group.Created" />
+        <div class="card-header">
+            <div class="d-flex justify-content-between">
+                <div class="dpCardHeaderTitle"><h5><i class="bi-box"></i> Edit Group</h5></div>
+                <div class="dpCardHeaderControl">
+                    <button type="submit" class="btn btn-outline-dark"><i class="bi-save"></i> Save</button>
+                    <button type="submit" class="btn btn-outline-dark" asp-page-handler="Copy"><i class="bi-clipboard-plus"></i> Copy</button>
+                    <a class="btn btn-outline-dark" href="~/groups"><i class="bi-arrow-left-square"></i> Back</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="dpDetailHeader"><i class="bi-bookmarks"></i> Detail</div>
+                        <table class="table dpEditTable">
+                            <tbody>
+                                <tr>
+                                    <td>Group Id</td>
+                                    <td>@Model.Group.GroupId</td>
+                                </tr>
+                                <tr>
+                                    <td>Treatment Id</td>
+                                    <td><input asp-for="Group.TreatmentId" class="form-control" tabindex="3" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Name</td>
+                                    <td><input asp-for="Group.Name" class="form-control" tabindex="4" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Sort Group</td>
+                                    <td><input asp-for="Group.SortGroup" class="form-control" tabindex="4" style="width:150px" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Sort Order</td>
+                                    <td><input asp-for="Group.SortOrder" class="form-control" tabindex="4" style="width:150px" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Seats</td>
+                                    <td><input asp-for="Group.Seats" class="form-control" tabindex="4" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Overbook</td>
+                                    <td><input asp-for="Group.Overbook" class="form-control" tabindex="4" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Bots</td>
+                                    <td><input asp-for="Group.Bots" class="form-control" tabindex="4" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Create Date</td>
+                                    <td>@Model.Group.Created.UtcToLocalUserTime().ToString("dd.MM.yyyy HH:mm:ss")</td>
+                                </tr>
+                                <tr>
+                                    <td>Last Update</td>
+                                    <td>@Model.Group.Updated.UtcToLocalUserTime().ToString("dd.MM.yyyy HH:mm:ss")</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="dpDetailHeader"><i class="bi-command"></i> Status</div>
+                        <table class="table dpEditTable">
+                            <tbody>
+                                <tr>
+                                    <td>Status</td>
+                                    <td><input asp-for="Group.Status" class="form-control" tabindex="4" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Check-in</td>
+                                    <td><input asp-for="Group.Checkin" class="form-control" tabindex="4" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Check-out</td>
+                                    <td><input asp-for="Group.Checkout" class="form-control" tabindex="4" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Waiting Room</td>
+                                    <td>
+                                        <input asp-for="Group.WaitingRoomId" class="form-control" tabindex="4" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Waiting Room Time</td>
+                                    <td><input asp-for="Group.WaitingRoomTime" class="form-control" tabindex="4" disabled /></td>
+                                </tr>
+                                <tr>
+                                    <td>Chat Room</td>
+                                    <td><input asp-for="Group.ChatRoomId" class="form-control" tabindex="4" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Chat Room Time</td>
+                                    <td><input asp-for="Group.ChatRoomTime" class="form-control" tabindex="4" disabled /></td>
+                                </tr>
+                                <tr>
+                                    <td>JSON</td>
+                                    <td><textarea asp-for="Group.GroupJson" class=" form-control" rows="2" tabindex="7"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>Comment</td>
+                                    <td><textarea asp-for="Group.Comment" class=" form-control" rows="2" tabindex="7"></textarea></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+        </div>
+    </form>
+</div>
+

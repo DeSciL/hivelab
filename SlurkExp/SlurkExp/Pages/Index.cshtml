@@ -1,0 +1,81 @@
+﻿@page
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@section head {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+}
+
+<div>
+    <h1 class="display-4">Welcome</h1>
+    <p>A backend for AI Slurk Experiments.</p>
+</div>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="row">
+        <div class="col-3">
+            <div class="card" style="min-height:350px">
+                <div class="card-header">Exp</div>
+                <div class="card-body">
+                    <ul>
+                        <li><a href="~/live">Live</a></li>
+                        <li><a href="~/settings">Settings</a></li>
+                        <li><a href="~/treatments">Treatments</a></li>
+                        <li><a href="~/prompts">Prompts</a></li>
+                        <li><a href="~/groups">Groups</a></li>
+                        <li><a href="~/clients">Clients</a></li>
+                        <li><a href="~/logevents">LogEvents</a></li>
+                        <li><a href="~/bots">Bots</a></li>
+                        <li><a href="~/setup">Setup</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card" style="min-height:350px">
+                <div class="card-header">Slurk</div>
+                <div class="card-body">
+                    <ul>
+                        <li><a href="~/layouts">Layouts</a></li>
+                        <li><a href="~/logging">Logs</a></li>
+                        <li><a href="~/permissions">Permissions</a></li>
+                        <li><a href="~/rooms">Rooms</a></li>
+                        <li><a href="~/sessions">Sessions</a></li>
+                        <li><a href="~/tasks">Tasks</a></li>
+                        <li><a href="~/tokens">Tokens</a></li>
+                        <li><a href="~/users">Users</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*
+    <div class="row">
+        <div class="col">
+            <pre>
+            <code class="language-powershell">
+# Example PowerShell script
+iex (irm https://slurkexp.vlab.ethz.ch/webapi/slurkexp_api.ps1)
+New-SlurkExpRoom -NumUser 1 -WaitTimeout 60 -ChatTimeout 60 -Formatted
+            </code>
+            </pre>
+        </div>
+        <div class="col">
+        </div>
+    </div>
+    *@
+}
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/powershell.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+}

@@ -1,0 +1,66 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Rooms";
+}
+
+<div class="card shadow">
+    <div class="card-header">
+        <div class="d-flex justify-content-between">
+            <div class="dpCardHeaderTitle"><h5><i class="bi-box"></i> Slurk Rooms</h5></div>
+            <div class="dpCardHeaderControl">
+                <a class="btn btn-outline-dark" href="~/"><i class="bi-arrow-left-square"></i> Back</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped table-sm dpTable">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>LayoutId</th>
+                    <th>ReadOnly</th>
+                    <th>Created</th>
+                    <th>Modified</th>
+                    @*<th width="75px">&nbsp;</th>*@
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model.SlurkRooms)
+                {
+                    <tr>
+                        <td>@p.Id</td>
+                        <td>@p.LayoutId</td>
+                        <td>@p.ReadOnly</td>
+                        <td>@p.DateCreated</td>
+                        <td>@p.DateModified</td>
+                        @*<td align="right"><a href="~/rooms/detail/@p.Id">Detail</a></td>*@
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <nav aria-label="Pagination">
+            <cs-pager cs-paging-pagesize="@Model.Paging.ItemsPerPage"
+                      cs-paging-pagenumber="@Model.Paging.CurrentPage"
+                      cs-paging-totalitems="@Model.Paging.TotalItems"
+                      cs-pagenumber-param="p"
+                      cs-show-first-last="false"
+                      cs-suppress-empty-nextprev="true"
+                      cs-suppress-inactive-firstlast="true"
+                      cs-first-page-text="First"
+                      cs-last-page-text="Last"
+                      cs-pager-ul-class="pagination"
+                      cs-pager-li-current-class="page-item active"
+                      cs-pager-li-other-class="page-item"
+                      cs-pager-li-non-active-class="page-item disabled"
+                      cs-pager-link-current-class="page-link"
+                      cs-pager-link-other-class="page-link"
+                      cs-preserve-ambient-querystring="true"
+                      cs-paging-maxpageritems="2"
+                      asp-basehref="~/rooms">
+            </cs-pager>
+        </nav>
+    </div>
+</div>

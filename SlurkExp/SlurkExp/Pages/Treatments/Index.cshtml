@@ -1,0 +1,87 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Treatments";
+}
+
+<div class="card shadow">
+    <div class="card-header">
+        <div class="d-flex justify-content-between">
+            <div class="dpCardHeaderTitle"><h5><i class="bi-box"></i> Treatments</h5></div>
+            <div class="dpCardHeaderControl">
+                <a class="btn btn-outline-dark" href="~/"><i class="bi-arrow-left-square"></i> Back</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped table-sm dpTable">
+            <thead>
+                <tr>
+                    <th width="50px">TId</th>
+                    <th width="250px">Name</th>
+                    <th width="100px">PromptId</th>
+                    <th width="100px">Category</th>
+                    <th width="100px">Groups</th>
+                    <th width="100px">Seats</th>
+                    <th width="100px">Overbook</th>
+                    <th width="100px">Bots</th>
+                    <th>Info | Pos | Topic</th>
+                    <th>Comments</th>
+                    <th width="50px">&nbsp;</th>
+                    <th width="50px">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model.Treatments)
+                {
+                    <tr>
+                        <td><a href="~/treatments/detail/@p.PromptId" class="not-active">@p.TreatmentId</a></td>
+                        <td>@p.Name</td>
+                        <td>@p.PromptId</td>
+                        <td>@p.Category</td>
+                        <td>@p.GroupCount</td>
+                        <td>@p.Seats</td>
+                        <td>@p.Overbook</td>
+                        <td>@p.Bots</td>
+                        <td>@p.Info | @p.Positive | @p.Topic</td>
+                        <td>@p.Comment</td>
+                        <td align="right"><a href="~/treatments/edit/@p.PromptId">Edit</a></td>
+                        <td align="right"><a href="~/treatments/detail/@p.PromptId">Detail</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <nav aria-label="Pagination">
+            <cs-pager cs-paging-pagesize="@Model.Paging.ItemsPerPage"
+                      cs-paging-pagenumber="@Model.Paging.CurrentPage"
+                      cs-paging-totalitems="@Model.Paging.TotalItems"
+                      cs-pagenumber-param="p"
+                      cs-show-first-last="false"
+                      cs-suppress-empty-nextprev="true"
+                      cs-suppress-inactive-firstlast="true"
+                      cs-first-page-text="First"
+                      cs-last-page-text="Last"
+                      cs-pager-ul-class="pagination"
+                      cs-pager-li-current-class="page-item active"
+                      cs-pager-li-other-class="page-item"
+                      cs-pager-li-non-active-class="page-item disabled"
+                      cs-pager-link-current-class="page-link"
+                      cs-pager-link-other-class="page-link"
+                      cs-preserve-ambient-querystring="true"
+                      cs-paging-maxpageritems="2"
+                      asp-basehref="~/treatments">
+            </cs-pager>
+        </nav>
+    </div>
+</div>
+
+@section Scripts {
+    @*
+    <script type="text/javascript">
+        document.getElementById("Query").focus();
+    </script>
+    <partial name="_ToolTipPartial" />
+    *@
+}

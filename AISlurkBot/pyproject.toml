@@ -1,0 +1,20 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "slurk-setup-descil"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "aiohttp>=3.11.13",
+    "fastapi[standard]>=0.115.11",
+    "openai>=1.65.4",
+    "python-socketio[asyncio_client]",
+    "gunicorn>=23.0.0",
+]
+
+[tool.ruff]
+cache-dir = "~/.cache/ruff"
