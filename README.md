@@ -1,1 +1,1 @@
-# hivelab - An Extension of Slurk for Group Conversations with LLM Agents
+## hivelab - An Extension of Slurk for Group Conversations with LLM Agents
